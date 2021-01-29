@@ -1,4 +1,4 @@
-package com.example.PSSmanager;
+package io.myproject.PSSmanager;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
