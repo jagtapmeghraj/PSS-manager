@@ -1,10 +1,10 @@
-package io.myproject.PSSmanager;
+package io.pssmanager;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PssManagerApplicationTests {
+class MyApplicationTests {
 
 	@Test
 	void contextLoads() {
