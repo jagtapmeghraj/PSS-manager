@@ -7,9 +7,9 @@ import javax.persistence.Id;
 public class Partner {
 
     @Id
-    private long PartnerId;
-    private long UserId;
+    private Long PartnerId;
+    private User User;
     private String Name;
-    private int Contact;
+    private Integer Contact;
 
 }

@@ -7,12 +7,15 @@ import javax.persistence.Id;
 public class User {
 
     @Id
-    private long UserId;
+    private Long UserId;
     private String Name;
-    private int Contact;
+    private Integer Contact;
     private String Address;
-    private int TotalNumberofJars;
-    private int NumberofJarsinInventory;
-    private int NumberofCustomers;
+    private Integer TotalNumberofJars;
+    private Integer NumberofJarsinInventory;
+    private Integer NumberofCustomers;
+    private Customer customer;
+    private Jar Jar;
+    private Partner Partner;
 
 }

@@ -2,16 +2,17 @@ package io.pssmanager.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.sql.Timestamp;
 
 @Entity
 public class JarTransaction {
 
     @Id
-    private long JarTransactionId;
-    private long JarId;
-    private long CustomerId;
-    private long UserId;
-    private long PartnerId;
+    private Long JarTransactionId;
+    private Jar Jar;
+    private Customer Customer;
+    private User User;
+    private Partner Partner;
     private String Action; //is jar "GIVEN" to or "TAKEN" from customer?
-    private String TimeStamp;
+    private Timestamp TimeStamp;
 }

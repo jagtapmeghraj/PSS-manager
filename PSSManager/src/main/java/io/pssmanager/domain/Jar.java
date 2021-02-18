@@ -7,8 +7,8 @@ import javax.persistence.Id;
 public class Jar {
 
         @Id
-        private long JarId;
-        private long CustomerId;
+        private Long JarId;
+        private Customer Customer;
         private String JarName;
-        private long UserId;
+        private User User;
 }

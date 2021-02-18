@@ -7,12 +7,55 @@ import javax.persistence.Id;
 public class Customer {
 
     @Id
-    private long CustomerId;
+    private Long CustomerId;
     private String Name;
-    private int Contact;
+    private Integer Contact;
     private String Address;
-    private long JarId;
-    private long UserId;
-    private int DueAmount;
-    private int PricePerJar;
+    private Jar Jar;
+    private User User ;
+    private Integer DueAmount;
+    private Integer PricePerJar;
+
+    public Customer() {
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public Integer getContact() {
+        return Contact;
+    }
+
+    public void setContact(Integer contact) {
+        Contact = contact;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
+    }
+
+    public Integer getDueAmount() {
+        return DueAmount;
+    }
+
+    public void setDueAmount(Integer dueAmount) {
+        DueAmount = dueAmount;
+    }
+
+    public Integer getPricePerJar() {
+        return PricePerJar;
+    }
+
+    public void setPricePerJar(Integer pricePerJar) {
+        PricePerJar = pricePerJar;
+    }
 }
