@@ -13,14 +13,15 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long id;
     @NotBlank(message = "Name is required")
     private String name;
-    @Size(min=4, max=10, message = "Please use 4 to 10 characters")
+
+    @Size(min=10, max=10, message = "Enter valid mobile number")
     @Column(updatable = false, unique = true)
-    private String userIdentifier;
     @NotBlank(message = "Contact number is required")
-    private String contact;
+    private String userContact;
+
     @NotBlank(message = "Address is required")
     private String address;
     private Integer totalNumberofJars;
@@ -45,14 +46,6 @@ public class User {
     public User() {
     }
 
-    public String getUserIdentifier() {
-        return userIdentifier;
-    }
-
-    public void setUserIdentifier(String userIdentifier) {
-        this.userIdentifier = userIdentifier;
-    }
-
     public String getName() {
         return name;
     }
@@ -61,12 +54,12 @@ public class User {
         this.name = name;
     }
 
-    public String getContact() {
-        return contact;
+    public String getUserContact() {
+        return userContact;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setUserContact(String userContact) {
+        this.userContact = userContact;
     }
 
     public String getAddress() {
