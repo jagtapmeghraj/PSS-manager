@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -21,16 +18,33 @@ public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
+
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
     @PostMapping("")
-    public ResponseEntity<?> addNewCustomer(@RequestBody Customer customer, BindingResult result)
+    public ResponseEntity<?> addNewCustomer(@Valid @RequestBody Customer customer, BindingResult result)
     {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if(errorMap!=null) return errorMap;
-        Customer _customer = customerService.saveCustomer(customer);
+        Customer _customer = customerService.saveorUpdateCustomer(customer);
         return new ResponseEntity<Customer>(_customer, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getCustomerById(@PathVariable Long id)
+    {
+        Customer customer = customerService.findCustomerById(id);
+        return new ResponseEntity<Customer>(customer,HttpStatus.OK);
+    }
+    @GetMapping("/all")
+    public Iterable<Customer> getAllCustomers(){return customerService.findAllCustomers();}
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteCustomer(@PathVariable Long id){
+
+        customerService.deleteCustomerById(id);
+        return new ResponseEntity<String>("Customer with id: '"+id+"' was deleted", HttpStatus.OK);
     }
 
 }

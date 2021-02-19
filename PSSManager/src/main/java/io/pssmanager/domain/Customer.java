@@ -1,18 +1,25 @@
 package io.pssmanager.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
 public class Customer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Name is required")
     private String name;
-    private Integer contact;
+    @Size(min=10, max=10, message = "Enter valid mobile number")
+    @NotBlank(message = "Contact number is required")
+    private String contact;
+    @NotBlank(message = "Address is required")
     private String address;
 
-    @OneToMany
+    @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "customer")
     private List<Jar> listofJars;
     @OneToMany
     private List<JarTransaction> listofJarTransactions;
@@ -41,11 +48,11 @@ public class Customer {
         this.name = name;
     }
 
-    public Integer getContact() {
+    public String getContact() {
         return contact;
     }
 
-    public void setContact(Integer contact) {
+    public void setContact(String contact) {
         this.contact = contact;
     }
 

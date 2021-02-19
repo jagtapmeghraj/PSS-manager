@@ -12,22 +12,37 @@ public class CustomerService {
     @Autowired
     private CustomerRespository customerRespository;
 
-    public Customer saveOrUpdateCustomer(Customer customer)
-    {
-        //Logic
-        return customerRespository.save(customer);
-    }
-
-    public Customer saveCustomer(Customer customer)
+    public Customer saveorUpdateCustomer(Customer customer)
     {
         try{
-            customer.setId(customer.getId());
             return customerRespository.save(customer);
         }catch (Exception e){
-            throw new CustomerIdException("customer with this id already exists.");
-
+            throw new CustomerIdException("Error in saving customer to database");
         }
-
     }
+
+    public Customer findCustomerById(Long id)
+    {
+        try{
+            Customer customer = (customerRespository.findById(id)).get();
+            return customer;
+        }catch(Exception e){
+            throw new CustomerIdException("There is no customer with id : "+id);
+        }
+    }
+
+    public Iterable<Customer> findAllCustomers(){
+        return customerRespository.findAll();
+    }
+
+    public void deleteCustomerById(Long id){
+        try {
+            Customer customer = findCustomerById(id);
+            customerRespository.delete(customer);
+        }catch (Exception e){
+            throw new CustomerIdException("Cannot delete customer with id :"+id);
+        }
+    }
+
 
 }
