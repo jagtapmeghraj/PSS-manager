@@ -1,3 +1,4 @@
+/*
 package io.pssmanager.repositories;
 
 import io.pssmanager.domain.User;
@@ -14,3 +15,4 @@ public interface UserRespository extends CrudRepository<User,Long> {
     @Override
     Iterable<User> findAll();
 }
+*/

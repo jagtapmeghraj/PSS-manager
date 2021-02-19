@@ -11,7 +11,7 @@ import java.util.Date;
 public class JarTransaction {
 
     @Id
-    private Long JarTransactionId;
+    private Long id;
     @OneToOne
     private Jar Jar;
     @ManyToOne

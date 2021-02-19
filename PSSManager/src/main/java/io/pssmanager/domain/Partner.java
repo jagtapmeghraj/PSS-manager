@@ -10,7 +10,7 @@ import java.util.List;
 public class Partner {
 
     @Id
-    private Long PartnerId;
+    private Long id;
     @ManyToOne
     private User User;
     private String Name;

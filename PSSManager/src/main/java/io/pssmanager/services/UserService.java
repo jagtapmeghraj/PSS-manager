@@ -1,3 +1,4 @@
+/*
 package io.pssmanager.services;
 
 import io.pssmanager.domain.Customer;
@@ -59,3 +60,4 @@ public class UserService {
         userRespository.delete(user);
     }
 }
+*/

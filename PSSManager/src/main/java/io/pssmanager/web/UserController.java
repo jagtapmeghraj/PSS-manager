@@ -1,3 +1,4 @@
+/*
 package io.pssmanager.web;
 
 import io.pssmanager.domain.User;
@@ -62,3 +63,4 @@ public class UserController {
     }
 
 }
+*/

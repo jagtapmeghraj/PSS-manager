@@ -11,7 +11,7 @@ import java.util.Date;
 public class MoneyTransaction {
 
     @Id
-    private Long MoneyTransactionId;
+    private Long id;
     @ManyToOne
     private Customer Customer;
     @ManyToOne

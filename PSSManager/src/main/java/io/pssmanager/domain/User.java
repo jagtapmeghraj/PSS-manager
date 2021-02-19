@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,18 +33,24 @@ public class User {
     @JsonFormat(pattern = "dd-mm-yyyy")
     private Date updated_At;
 
-    @OneToMany
-    private List<Customer> listofCustomers;
-    @OneToMany
-    private List<Jar> listofJars;
-    @OneToMany
-    private List<Partner> listofPartners;
-    @OneToMany
-    private List<JarTransaction> listofJarTransactions;
-    @OneToMany
-    private List<MoneyTransaction> listofMoneyTransactions;
+    @OneToMany//(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+    private List<Jar> listofJars = new ArrayList<>();
+    @OneToMany//(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+    private List<Partner> listofPartners = new ArrayList<>();
+    @OneToMany//(fetch = FetchType.EAGER, mappedBy = "user")
+    private List<JarTransaction> listofJarTransactions = new ArrayList<>();
+    @OneToMany//(fetch = FetchType.EAGER, mappedBy = "user")
+    private List<MoneyTransaction> listofMoneyTransactions = new ArrayList<>();
 
     public User() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -108,6 +115,39 @@ public class User {
 
     public void setUpdated_At(Date updated_At) {
         this.updated_At = updated_At;
+    }
+    
+
+    public List<Jar> getListofJars() {
+        return listofJars;
+    }
+
+    public void setListofJars(List<Jar> listofJars) {
+        this.listofJars = listofJars;
+    }
+
+    public List<Partner> getListofPartners() {
+        return listofPartners;
+    }
+
+    public void setListofPartners(List<Partner> listofPartners) {
+        this.listofPartners = listofPartners;
+    }
+
+    public List<JarTransaction> getListofJarTransactions() {
+        return listofJarTransactions;
+    }
+
+    public void setListofJarTransactions(List<JarTransaction> listofJarTransactions) {
+        this.listofJarTransactions = listofJarTransactions;
+    }
+
+    public List<MoneyTransaction> getListofMoneyTransactions() {
+        return listofMoneyTransactions;
+    }
+
+    public void setListofMoneyTransactions(List<MoneyTransaction> listofMoneyTransactions) {
+        this.listofMoneyTransactions = listofMoneyTransactions;
     }
 
     @PrePersist

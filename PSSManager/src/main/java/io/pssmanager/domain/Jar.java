@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 public class Jar {
 
         @Id
-        private Long JarId;
+        private Long id;
         @ManyToOne
         private Customer Customer;
         private String JarName;
