@@ -31,7 +31,7 @@ public class JarService {
             _jar.setCustomer(jar.getCustomer());
             return jarRepository.save(jar);
         }catch(Exception e){
-            throw new JarNameException("Jar : "+jar.getJarName()+" could not be updated \n"+e);
+            throw new JarNameException("Jar : "+jar.getJarName()+" could not be updated `\n"+e);
         }
     }
 

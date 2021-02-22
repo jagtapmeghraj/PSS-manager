@@ -3,6 +3,7 @@ package io.pssmanager.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,10 +20,10 @@ public class Customer {
     @NotBlank(message = "Address is required")
     private String address;
 
-    @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "customer")
-    private List<Jar> listofJars;
+    @OneToMany (fetch = FetchType.EAGER, mappedBy = "customer")
+    private List<Jar> listofJars = new ArrayList<>();
     @OneToMany
-    private List<JarTransaction> listofJarTransactions;
+    private List<JarTransaction> listofJarTransactions = new ArrayList<>();
     @OneToMany
     private List<MoneyTransaction> listofMoneyTransactions;
     private Integer dueAmount;

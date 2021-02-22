@@ -1,10 +1,7 @@
-/*
 package io.pssmanager.services;
 
-import io.pssmanager.domain.Customer;
 import io.pssmanager.domain.User;
-import io.pssmanager.exceptions.UserContactException;
-import io.pssmanager.repositories.UserRespository;
+import io.pssmanager.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,52 +9,30 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     @Autowired
-    private UserRespository userRespository;
+    private UserRepository userRepository;
 
     public User saveUser(User user)
     {
-        try{
-            user.setUserContact(user.getUserContact());
-            return userRespository.save(user);
-
-        }catch (Exception e){
-            throw new UserContactException("User already exists.");
-
-        }
+        return user;
     }
 
     public User updateUser(User user)
     {
-        User _user = userRespository.findByUserContact(user.getUserContact());
-        _user.setName(user.getName());
-        _user.setAddress(user.getAddress());
-        _user.setNumberofCustomers(user.getNumberofCustomers());
-        _user.setTotalNumberofJars(user.getTotalNumberofJars());
-        _user.setNumberofJarsinInventory(user.getNumberofJarsinInventory());
-        return userRespository.save(_user);
+       return user;
     }
 
     public User findUserByContact(String userContact){
 
-        User user = userRespository.findByUserContact(userContact);
-
-        if(user==null){
-            throw new UserContactException("There is no user registered on this number.");
-        }
-        return user;
+        return new User();
     }
 
     public Iterable<User> findAllUsers(){
-        return userRespository.findAll();
+        return userRepository.findAll();
     }
 
     public void deleteUserByContact(String userContact){
-        User user = userRespository.findByUserContact(userContact);
-        if(user==null){
-            throw new UserContactException("Cannot delete user. User with contact number "+ userContact +" doesn't exist.");
-        }
+        User user = userRepository.findByUserContact(userContact);
 
-        userRespository.delete(user);
+        userRepository.delete(user);
     }
 }
-*/

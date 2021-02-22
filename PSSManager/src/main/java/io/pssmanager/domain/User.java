@@ -3,6 +3,7 @@ package io.pssmanager.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -15,9 +16,17 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "Name is required")
-    private String name;
 
+    @Email(message = "Username needs to be an email")
+    @NotBlank(message = "username is required")
+    @Column(unique = true)
+    private String username;
+    @NotBlank(message = "Please enter your full name")
+    private String fullName;
+    @NotBlank(message = "Password field is required")
+    private String password;
+    @Transient
+    private String confirmPassword;
     @Size(min=10, max=10, message = "Enter valid mobile number")
     @Column(updatable = false, unique = true)
     @NotBlank(message = "Contact number is required")
@@ -35,8 +44,8 @@ public class User {
 
     @OneToMany//(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     private List<Jar> listofJars = new ArrayList<>();
-    @OneToMany//(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
-    private List<Partner> listofPartners = new ArrayList<>();
+   /* @OneToMany//(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+    private List<Partner> listofPartners = new ArrayList<>();*/
     @OneToMany//(fetch = FetchType.EAGER, mappedBy = "user")
     private List<JarTransaction> listofJarTransactions = new ArrayList<>();
     @OneToMany//(fetch = FetchType.EAGER, mappedBy = "user")
@@ -53,12 +62,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getUserContact() {
@@ -124,14 +133,6 @@ public class User {
 
     public void setListofJars(List<Jar> listofJars) {
         this.listofJars = listofJars;
-    }
-
-    public List<Partner> getListofPartners() {
-        return listofPartners;
-    }
-
-    public void setListofPartners(List<Partner> listofPartners) {
-        this.listofPartners = listofPartners;
     }
 
     public List<JarTransaction> getListofJarTransactions() {
