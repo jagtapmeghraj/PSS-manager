@@ -1,17 +1,21 @@
 package io.pssmanager.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-
+//deviation from tutorial: implemented getpassword method from userdetails.
 @Entity
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +32,6 @@ public class User {
     @Transient
     private String confirmPassword;
     @Size(min=10, max=10, message = "Enter valid mobile number")
-    @Column(updatable = false, unique = true)
     @NotBlank(message = "Contact number is required")
     private String userContact;
 
@@ -41,6 +44,11 @@ public class User {
     private Date created_At;
     @JsonFormat(pattern = "dd-mm-yyyy")
     private Date updated_At;
+
+    //OneToMany with Customer
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
+    private List<Customer> customers = new ArrayList<>();
+
 
     @OneToMany//(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     private List<Jar> listofJars = new ArrayList<>();
@@ -64,6 +72,33 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public void setUsername(String username) {
@@ -151,6 +186,14 @@ public class User {
         this.listofMoneyTransactions = listofMoneyTransactions;
     }
 
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
+    }
+
     @PrePersist
     protected void onCreate(){
         this.created_At = new Date();
@@ -159,5 +202,36 @@ public class User {
     @PreUpdate
     protected void onUpdate(){
         this.updated_At = new Date();
+    }
+
+    @Override
+    @JsonIgnore
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isEnabled() {
+        return true;
     }
 }

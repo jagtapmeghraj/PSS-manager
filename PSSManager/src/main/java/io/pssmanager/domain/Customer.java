@@ -1,5 +1,7 @@
 package io.pssmanager.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -20,7 +22,11 @@ public class Customer {
     @NotBlank(message = "Address is required")
     private String address;
 
-    @OneToMany (fetch = FetchType.EAGER, mappedBy = "customer")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private User user;
+
+    @OneToMany
     private List<Jar> listofJars = new ArrayList<>();
     @OneToMany
     private List<JarTransaction> listofJarTransactions = new ArrayList<>();
@@ -63,6 +69,14 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<Jar> getListofJars() {

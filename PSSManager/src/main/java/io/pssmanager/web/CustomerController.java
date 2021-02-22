@@ -12,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/customer")
@@ -24,11 +26,11 @@ public class CustomerController {
     private MapValidationErrorService mapValidationErrorService;
 
     @PostMapping("")
-    public ResponseEntity<?> addNewCustomer(@Valid @RequestBody Customer customer, BindingResult result)
+    public ResponseEntity<?> addNewCustomer(@Valid @RequestBody Customer customer, BindingResult result, Principal principal)
     {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if(errorMap!=null) return errorMap;
-        Customer _customer = customerService.saveorUpdateCustomer(customer);
+        Customer _customer = customerService.saveOrUpdateCustomer(customer, principal.getName());
         return new ResponseEntity<Customer>(_customer, HttpStatus.CREATED);
     }
 
@@ -40,6 +42,12 @@ public class CustomerController {
     }
     @GetMapping("/all")
     public Iterable<Customer> getAllCustomers(){return customerService.findAllCustomers();}
+
+    @GetMapping("/allByUsername")
+    public List<Customer> getAllCustomersByUsername(Principal principal )
+    {
+        return customerService.findAllCustomersByUsername(principal.getName());
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable Long id){

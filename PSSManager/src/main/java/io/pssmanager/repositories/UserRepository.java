@@ -9,8 +9,6 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends CrudRepository<User,Long> {
 
-    User findByUserContact(String userContact);
-
-    @Override
-    Iterable<User> findAll();
+    User findByUsername(String username);
+    User getById(Long id);
 }

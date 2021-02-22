@@ -2,11 +2,17 @@ package io.pssmanager.services;
 
 import io.pssmanager.domain.Customer;
 import io.pssmanager.domain.JarTransaction;
+import io.pssmanager.domain.User;
 import io.pssmanager.exceptions.CustomerIdException;
 import io.pssmanager.repositories.CustomerRespository;
 import io.pssmanager.repositories.JarTransactionRepository;
+import io.pssmanager.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.*;
 
 @Service
 public class CustomerService {
@@ -15,11 +21,17 @@ public class CustomerService {
     private CustomerRespository customerRespository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private JarTransactionRepository jarTransactionRepository;
 
-    public Customer saveorUpdateCustomer(Customer customer)
+    public Customer saveOrUpdateCustomer(Customer customer, String username)
     {
         try{
+
+            User user = userRepository.findByUsername(username);
+            customer.setUser(user);
             return customerRespository.save(customer);
         }catch (Exception e){
             throw new CustomerIdException("Error in saving customer to database");
@@ -38,6 +50,19 @@ public class CustomerService {
 
     public Iterable<Customer> findAllCustomers(){
         return customerRespository.findAll();
+    }
+
+    public List<Customer> findAllCustomersByUsername(String username){
+
+        Iterable<Customer> customers = customerRespository.findAll();
+        List<Customer> res = new ArrayList<>();
+
+        for(Customer c:customers)
+        {
+            User user = c.getUser();
+            if(user.getUsername().equals(username)){res.add(c);}
+        }
+        return res;
     }
 
     public void deleteCustomerById(Long id){
