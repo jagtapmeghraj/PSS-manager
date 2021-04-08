@@ -27,14 +27,12 @@ public class Customer {
     private User user;
 
     @OneToMany
-    private List<Jar> listofJars = new ArrayList<>();
-    @OneToMany
-    private List<JarTransaction> listofJarTransactions = new ArrayList<>();
-    @OneToMany
-    private List<MoneyTransaction> listofMoneyTransactions;
+    private List<Transaction> listofTransactions = new ArrayList<>();
     private Integer dueAmount;
     private Integer pricePerJar;
-
+    private Integer numberOfJarsHeldCurrently;
+    private Integer totalNumberOfJarsTakenThisMonth;
+    private Integer totalCashGivenThisMonth;
 
     public Customer() {
     }
@@ -79,28 +77,12 @@ public class Customer {
         this.user = user;
     }
 
-    public List<Jar> getListofJars() {
-        return listofJars;
+    public List<Transaction> getListofTransactions() {
+        return listofTransactions;
     }
 
-    public void setListofJars(List<Jar> listofJars) {
-        this.listofJars = listofJars;
-    }
-
-    public List<JarTransaction> getListofJarTransactions() {
-        return listofJarTransactions;
-    }
-
-    public void setListofJarTransactions(List<JarTransaction> listofJarTransactions) {
-        this.listofJarTransactions = listofJarTransactions;
-    }
-
-    public List<MoneyTransaction> getListofMoneyTransactions() {
-        return listofMoneyTransactions;
-    }
-
-    public void setListofMoneyTransactions(List<MoneyTransaction> listofMoneyTransactions) {
-        this.listofMoneyTransactions = listofMoneyTransactions;
+    public void setListofTransactions(List<Transaction> listofTransactions) {
+        this.listofTransactions = listofTransactions;
     }
 
     public Integer getDueAmount() {
@@ -117,5 +99,29 @@ public class Customer {
 
     public void setPricePerJar(Integer pricePerJar) {
         this.pricePerJar = pricePerJar;
+    }
+
+    public Integer getNumberOfJarsHeldCurrently() {
+        return numberOfJarsHeldCurrently;
+    }
+
+    public void setNumberOfJarsHeldCurrently(Integer numberOfJarsHeldCurrently) {
+        this.numberOfJarsHeldCurrently = numberOfJarsHeldCurrently;
+    }
+
+    public Integer getTotalNumberOfJarsTakenThisMonth() {
+        return totalNumberOfJarsTakenThisMonth;
+    }
+
+    public void setTotalNumberOfJarsTakenThisMonth(Integer totalNumberOfJarsTakenThisMonth) {
+        this.totalNumberOfJarsTakenThisMonth = totalNumberOfJarsTakenThisMonth;
+    }
+
+    public Integer getTotalCashGivenThisMonth() {
+        return totalCashGivenThisMonth;
+    }
+
+    public void setTotalCashGivenThisMonth(Integer totalCashGivenThisMonth) {
+        this.totalCashGivenThisMonth = totalCashGivenThisMonth;
     }
 }

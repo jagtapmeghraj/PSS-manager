@@ -9,14 +9,18 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
-public class JarTransaction {
+public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull(message = "Specify the Jar")
-    @OneToOne
-    private Jar jar;
+
+    private Integer NoOfJarsGiven;
+    private Integer NoOfJarsTaken;
+
+    @NotNull(message = "Specify the amount")
+    private Integer AmountReceived;
+
     @NotNull(message = "Specify the Customer")
     @ManyToOne
     private Customer customer;
@@ -24,11 +28,10 @@ public class JarTransaction {
     private User user;
    /* @ManyToOne
     private Partner partner;*/
-    @NotBlank(message = "Specify Action")
-    private String action; //is jar "GIVEN" to or "TAKEN" from customer?
+
     private Date date;
 
-    public JarTransaction() {
+    public Transaction() {
     }
 
     public Long getId() {
@@ -37,14 +40,6 @@ public class JarTransaction {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Jar getJar() {
-        return jar;
-    }
-
-    public void setJar(Jar jar) {
-        this.jar = jar;
     }
 
     public Customer getCustomer() {
@@ -63,12 +58,28 @@ public class JarTransaction {
         this.user = user;
     }
 
-    public String getAction() {
-        return action;
+    public Integer getNoOfJarsGiven() {
+        return NoOfJarsGiven;
     }
 
-    public void setAction(String action) {
-        this.action = action;
+    public void setNoOfJarsGiven(Integer noOfJarsGiven) {
+        NoOfJarsGiven = noOfJarsGiven;
+    }
+
+    public Integer getNoOfJarsTaken() {
+        return NoOfJarsTaken;
+    }
+
+    public void setNoOfJarsTaken(Integer noOfJarsTaken) {
+        NoOfJarsTaken = noOfJarsTaken;
+    }
+
+    public Integer getAmountReceived() {
+        return AmountReceived;
+    }
+
+    public void setAmountReceived(Integer amountReceived) {
+        AmountReceived = amountReceived;
     }
 
     public Date getDate() {

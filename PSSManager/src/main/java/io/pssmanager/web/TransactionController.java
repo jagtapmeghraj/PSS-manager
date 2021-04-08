@@ -1,8 +1,7 @@
 package io.pssmanager.web;
 
-import io.pssmanager.domain.Jar;
-import io.pssmanager.domain.JarTransaction;
-import io.pssmanager.services.JarTransactionService;
+import io.pssmanager.domain.Transaction;
+import io.pssmanager.services.TransactionService;
 import io.pssmanager.services.MapValidationErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,27 +14,27 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/jartransaction")
 
-public class JarTransactionController {
+public class TransactionController {
 
     @Autowired
-    private JarTransactionService jarTransactionService;
+    private TransactionService transactionService;
 
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
     @PostMapping("")
-    public ResponseEntity<?> addNewJarTransaction(@Valid @RequestBody JarTransaction jarTransaction, BindingResult result)
+    public ResponseEntity<?> addNewTransaction(@Valid @RequestBody Transaction transaction, BindingResult result)
     {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if(errorMap!=null) return errorMap;
-        JarTransaction _jarTransaction = jarTransactionService.saveJarTransaction(jarTransaction);
-        return new ResponseEntity<JarTransaction>(_jarTransaction, HttpStatus.CREATED);
+        Transaction _transaction = transactionService.saveTransaction(transaction);
+        return new ResponseEntity<Transaction>(_transaction, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getTransactionById(@PathVariable Long id)
     {
-        JarTransaction jarTransaction = jarTransactionService.findJarTransactionById(id);
-        return new ResponseEntity<JarTransaction>(jarTransaction,HttpStatus.OK);
+        Transaction transaction = transactionService.findTransactionById(id);
+        return new ResponseEntity<Transaction>(transaction,HttpStatus.OK);
     }
 }

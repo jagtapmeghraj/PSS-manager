@@ -1,18 +1,17 @@
 package io.pssmanager.services;
 
 import io.pssmanager.domain.Customer;
-import io.pssmanager.domain.JarTransaction;
+import io.pssmanager.domain.Transaction;
 import io.pssmanager.domain.User;
 import io.pssmanager.exceptions.CustomerIdException;
 import io.pssmanager.repositories.CustomerRespository;
-import io.pssmanager.repositories.JarTransactionRepository;
+import io.pssmanager.repositories.TransactionRepository;
 import io.pssmanager.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.*;
 
 @Service
 public class CustomerService {
@@ -24,7 +23,7 @@ public class CustomerService {
     private UserRepository userRepository;
 
     @Autowired
-    private JarTransactionRepository jarTransactionRepository;
+    private TransactionRepository jarTransactionRepository;
 
     public Customer saveOrUpdateCustomer(Customer customer, String username)
     {
@@ -74,7 +73,7 @@ public class CustomerService {
         }
     }
 
-    public JarTransaction addJarTransaction(Long customerId, JarTransaction jarTransaction)
+    public Transaction addJarTransaction(Long customerId, Transaction jarTransaction)
     {
         try{
             Customer c  = findCustomerById(customerId);

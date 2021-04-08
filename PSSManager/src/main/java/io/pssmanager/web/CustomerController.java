@@ -1,8 +1,6 @@
 package io.pssmanager.web;
 
 import io.pssmanager.domain.Customer;
-import io.pssmanager.domain.JarTransaction;
-import io.pssmanager.domain.User;
 import io.pssmanager.services.CustomerService;
 import io.pssmanager.services.MapValidationErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
