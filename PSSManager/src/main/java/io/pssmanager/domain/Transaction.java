@@ -15,16 +15,21 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Specify jars given")
     private Integer NoOfJarsGiven;
+
+    @NotNull(message = "Specify jars taken")
     private Integer NoOfJarsTaken;
 
-    @NotNull(message = "Specify the amount")
+    @NotNull(message = "Specify amount received")
     private Integer AmountReceived;
 
-    @NotNull(message = "Specify the Customer")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Customer customer;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private User user;
    /* @ManyToOne
     private Partner partner;*/
@@ -95,8 +100,5 @@ public class Transaction {
         this.date = new Date();
     }
 
-    @PreUpdate
-    protected void onUpdate(){
-        this.date = new Date();
-    }
+
 }

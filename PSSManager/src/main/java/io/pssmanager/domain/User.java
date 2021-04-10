@@ -25,12 +25,16 @@ public class User implements UserDetails {
     @NotBlank(message = "username is required")
     @Column(unique = true)
     private String username;
+
     @NotBlank(message = "Please enter your full name")
     private String fullName;
+
     @NotBlank(message = "Password field is required")
     private String password;
+
     @Transient
     private String confirmPassword;
+
     @Size(min=10, max=10, message = "Enter valid mobile number")
     @NotBlank(message = "Contact number is required")
     private String userContact;
@@ -40,6 +44,7 @@ public class User implements UserDetails {
     private Integer totalNumberofJars;
     private Integer numberofJarsinInventory;
     private Integer numberofCustomers;
+
     @JsonFormat(pattern = "dd-mm-yyyy")
     private Date created_At;
     @JsonFormat(pattern = "dd-mm-yyyy")
