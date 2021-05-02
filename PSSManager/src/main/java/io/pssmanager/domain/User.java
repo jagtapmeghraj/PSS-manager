@@ -25,12 +25,16 @@ public class User implements UserDetails {
     @NotBlank(message = "username is required")
     @Column(unique = true)
     private String username;
+
     @NotBlank(message = "Please enter your full name")
     private String fullName;
+
     @NotBlank(message = "Password field is required")
     private String password;
+
     @Transient
     private String confirmPassword;
+
     @Size(min=10, max=10, message = "Enter valid mobile number")
     @NotBlank(message = "Contact number is required")
     private String userContact;
@@ -40,6 +44,7 @@ public class User implements UserDetails {
     private Integer totalNumberofJars;
     private Integer numberofJarsinInventory;
     private Integer numberofCustomers;
+
     @JsonFormat(pattern = "dd-mm-yyyy")
     private Date created_At;
     @JsonFormat(pattern = "dd-mm-yyyy")
@@ -49,15 +54,10 @@ public class User implements UserDetails {
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
     private List<Customer> customers = new ArrayList<>();
 
-
-    @OneToMany//(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
-    private List<Jar> listofJars = new ArrayList<>();
    /* @OneToMany//(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     private List<Partner> listofPartners = new ArrayList<>();*/
     @OneToMany//(fetch = FetchType.EAGER, mappedBy = "user")
-    private List<JarTransaction> listofJarTransactions = new ArrayList<>();
-    @OneToMany//(fetch = FetchType.EAGER, mappedBy = "user")
-    private List<MoneyTransaction> listofMoneyTransactions = new ArrayList<>();
+    private List<Transaction> listofTransactions = new ArrayList<>();
 
     public User() {
     }
@@ -160,30 +160,13 @@ public class User implements UserDetails {
     public void setUpdated_At(Date updated_At) {
         this.updated_At = updated_At;
     }
-    
 
-    public List<Jar> getListofJars() {
-        return listofJars;
+    public List<Transaction> getListofTransactions() {
+        return listofTransactions;
     }
 
-    public void setListofJars(List<Jar> listofJars) {
-        this.listofJars = listofJars;
-    }
-
-    public List<JarTransaction> getListofJarTransactions() {
-        return listofJarTransactions;
-    }
-
-    public void setListofJarTransactions(List<JarTransaction> listofJarTransactions) {
-        this.listofJarTransactions = listofJarTransactions;
-    }
-
-    public List<MoneyTransaction> getListofMoneyTransactions() {
-        return listofMoneyTransactions;
-    }
-
-    public void setListofMoneyTransactions(List<MoneyTransaction> listofMoneyTransactions) {
-        this.listofMoneyTransactions = listofMoneyTransactions;
+    public void setListofTransactions(List<Transaction> listofTransactions) {
+        this.listofTransactions = listofTransactions;
     }
 
     public List<Customer> getCustomers() {

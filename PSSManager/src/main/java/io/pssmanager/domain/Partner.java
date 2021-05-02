@@ -16,8 +16,7 @@ public class Partner {
     private String Name;
     private String Contact;
     @OneToMany
-    private List<JarTransaction> ListofJarTransactions;
-    @OneToMany
-    private List<MoneyTransaction> ListofMoneyTransactions;
+    private List<Transaction> ListofTransactions;
+
 
 }

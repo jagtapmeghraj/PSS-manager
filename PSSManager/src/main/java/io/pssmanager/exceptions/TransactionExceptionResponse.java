@@ -1,10 +1,10 @@
 package io.pssmanager.exceptions;
 
-public class JarNameExceptionResponse {
+public class TransactionExceptionResponse {
 
     private String message;
 
-    public JarNameExceptionResponse(String message) {
+    public TransactionExceptionResponse(String message) {
         this.message = message;
     }
 

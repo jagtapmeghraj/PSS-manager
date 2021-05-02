@@ -19,8 +19,8 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     }
 
     @ExceptionHandler
-    public final ResponseEntity<Object> handleJarNameException(JarNameException ex, WebRequest request){
-        JarNameExceptionResponse exceptionResponse = new JarNameExceptionResponse((ex.getMessage()));
+    public final ResponseEntity<Object> handleJarNameException(TransactionException ex, WebRequest request){
+        TransactionExceptionResponse exceptionResponse = new TransactionExceptionResponse((ex.getMessage()));
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
