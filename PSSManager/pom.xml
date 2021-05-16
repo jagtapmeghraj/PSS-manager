@@ -18,19 +18,6 @@
         	<spring-cloud.version>Greenwich.SR1</spring-cloud.version>
 	</properties>
 	
-	<!-- The Spring Cloud GCP BOM will manage spring-cloud-gcp version numbers for you. -->
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-gcp-dependencies</artifactId>
-				<version>${project.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
