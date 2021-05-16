@@ -81,12 +81,13 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-				 <groupId>com.google.cloud.tools</groupId>
-        			<artifactId>appengine-maven-plugin</artifactId>
-        			<version>2.4.0</version>
-				<configuration>
-					<version>1</version>
-				</configuration>
+				  <groupId>com.google.cloud.tools</groupId>
+				  <artifactId>appengine-maven-plugin</artifactId>
+				  <version>2.0.0-rc2</version>
+				  <configuration>
+				    <deploy.projectId>something</deploy.projectId>
+				    <deploy.version>something</deploy.version>
+				  </configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-deploy-plugin</artifactId>
