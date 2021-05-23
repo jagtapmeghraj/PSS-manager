@@ -22,5 +22,11 @@ public class MyApplication {
   	public String hello() {
     	return "Hello world! from Jar App";
   	}
+	
+	@GetMapping("/error")
+  	public String error() {
+    	return "There is an error in runtime";
+  	}
+	
 
 }
