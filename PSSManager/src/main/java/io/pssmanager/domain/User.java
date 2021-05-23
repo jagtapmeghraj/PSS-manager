@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 //deviation from tutorial: implemented getpassword method from userdetails.
 @Entity
+@Table(name = "JAR_USERS")
 public class User implements UserDetails {
 
     @Id
